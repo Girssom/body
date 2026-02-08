@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-slate-100 text-slate-900 font-sans;
+}
+
+.glass-card {
+  @apply bg-white/95 backdrop-blur-md border border-slate-200 shadow-[0_12px_30px_rgba(15,23,42,0.08)] rounded-3xl;
+}
+
+.glass-dark-card {
+  @apply bg-slate-900/70 backdrop-blur-xl border border-slate-800/80 shadow-[0_25px_60px_rgba(15,23,42,0.85)] rounded-3xl;
+}
+
+.glass-soft-card {
+  @apply bg-slate-900/60 backdrop-blur-xl border border-slate-800/60 rounded-3xl;
+}
+
+.toast-enter {
+  animation: toast-in 0.35s ease-out forwards;
+}
+
+@keyframes toast-in {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
