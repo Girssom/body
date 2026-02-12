@@ -9,7 +9,6 @@
     "lint": "eslint \"src/**/*.{ts,tsx}\""
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.48.0",
     "html2canvas": "^1.4.1",
     "qrcode.react": "^4.1.0",
     "jspdf": "^2.5.1",
