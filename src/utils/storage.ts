@@ -1,6 +1,15 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import type { WorkoutLog, WeeklySummary, LevelInfo } from '../types';
 
+// 生成唯一ID的兼容方法
+const generateId = () => {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+};
+
 const WORKOUT_KEY = 'fitness_workouts_v1';
 const SUMMARY_KEY = 'fitness_weekly_summaries_v1';
 const LEVEL_KEY = 'fitness_level_info_v1';
@@ -70,7 +79,7 @@ const syncWorkoutsToCloud = async (logs: WorkoutLog[]) => {
   const client = getSupabaseClient();
   if (!client) return;
 
-  const userId = window.localStorage.getItem('fitness_user_id') ?? crypto.randomUUID();
+  const userId = window.localStorage.getItem('fitness_user_id') ?? generateId();
   window.localStorage.setItem('fitness_user_id', userId);
 
   await client.from('workouts').upsert(
@@ -87,7 +96,7 @@ const syncSummariesToCloud = async (summaries: WeeklySummary[]) => {
   const client = getSupabaseClient();
   if (!client) return;
 
-  const userId = window.localStorage.getItem('fitness_user_id') ?? crypto.randomUUID();
+  const userId = window.localStorage.getItem('fitness_user_id') ?? generateId();
   window.localStorage.setItem('fitness_user_id', userId);
 
   await client.from('weekly_summaries').upsert(

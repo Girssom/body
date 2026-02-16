@@ -10,6 +10,15 @@ type Props = {
 
 const todayISO = () => new Date().toISOString();
 
+// 生成唯一ID的兼容方法
+const generateId = () => {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+};
+
 export const WorkoutForm: React.FC<Props> = ({ onAdd }) => {
   const [exercise, setExercise] = useState(PRESET_EXERCISES[0]);
   const [customExercise, setCustomExercise] = useState('');
@@ -61,7 +70,7 @@ export const WorkoutForm: React.FC<Props> = ({ onAdd }) => {
     setError(null);
 
     const log: WorkoutLog = {
-      id: crypto.randomUUID(),
+      id: generateId(),
       date: todayISO(),
       exercise: name,
       // Strength
